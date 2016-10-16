@@ -1,0 +1,9 @@
+{# app/Resources/views/lucky/number.html.twig #}
+{% extends 'base.html.twig' %}
+{% block title%} Lucky Number {% endblock %}
+{% block body %}
+	<h1>Lucky Numbers: {{ luckynumberlist }} </h1>
+	<br/>
+	
+	<a href="{{path('hello', {'name':'Samadou'})}}">Go to the Hello Page</a>
+{% endblock %}
