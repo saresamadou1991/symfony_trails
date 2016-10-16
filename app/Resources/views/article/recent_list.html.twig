@@ -1,6 +1,17 @@
 {# app/Resources/views/articles/recent_list.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+
+
+{% block body %}
 {% for article in articles %}
 	<a href="/article{{article.slug}}">
-	{{article.title}}
+	{{ article.title }}
 	</a>
 {% endfor %}
+
+
+	<img src="{{asset('images/logo_symfony.png')}}" alt="Symfony" />
+
+{% endblock %}

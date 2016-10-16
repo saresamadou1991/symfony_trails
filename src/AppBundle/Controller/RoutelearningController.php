@@ -6,15 +6,16 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request; 
 
 class RoutelearningController extends Controller
 {
 	/**
 	 * @Route("/blog/{page}", defaults={"page"=1}, requirements={"page":"\d+"})
 	 */
-	public function indexAction($page)
+	public function indexAction($page, Request $request)
 	{
-		echo "This is the ".$page." of the blog website";
+		echo "This is the ".$page." of the blog website"." <br/>The request format is ".$request->getRequestFormat();
 		
 		return new Response();
 	}
