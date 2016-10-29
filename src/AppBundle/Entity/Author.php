@@ -27,7 +27,17 @@ class Author
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
-
+	
+	
+	/**
+	 * @Assert\Choice(
+	 * 		choices = {"male", "female", "other"},
+	 * 		message = "choose a valid gender"
+	 * 	)
+	 * 
+	 */
+	
+	private $gender;
 
     /**
      * Get id
@@ -62,5 +72,26 @@ class Author
     {
         return $this->name;
     }
+    
+    /**
+     * Set gender
+     *
+     * @param string $gender
+     *
+     * @return Author
+     */
+    public function setGender($gender)
+    {
+    	$this->gender = $gender;
+		return $this;
+    }
+	/**
+     * Get gender
+     *
+     * @return string
+     */
+    public function getGender()
+    {
+        return $this->gender;
+    }
 }
-

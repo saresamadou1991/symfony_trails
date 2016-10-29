@@ -15,6 +15,7 @@ use AppBundle\Entity\Author;
 	{
 		$author = new Author();
 		$author->setName("Aboudou");
+		$author->setGender("other");
 		
 		$validator = $this->get('validator');
 		
@@ -22,8 +23,7 @@ use AppBundle\Entity\Author;
 		
 		if(count($errors) > 0)
 		{
-			$errorsString = (string) $errors;
-			return new Response($errorsString);
+			return $this->render('author/validation.html.twig', array('errors' =>$errors ));
 		}
 		
 		return new Response('The author object is validate!');

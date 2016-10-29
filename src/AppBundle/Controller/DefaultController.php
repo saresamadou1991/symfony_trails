@@ -2,11 +2,15 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Task;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Product;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 
 class DefaultController extends Controller
@@ -62,5 +66,30 @@ class DefaultController extends Controller
 		$em->flush();
 		
 		return new Response('Updated successfully product '.$product->getName());
+	}
+	
+	/**
+	 * @Route("/newtask")
+	 */
+	public function newAction(Request $request)
+	{
+		$task = new Task();
+		$task->setTask('Write a blog Post');
+		$task->setDueDate(new \DateTime('tomorrow'));
+		
+		$form = $this->createFormBuilder($task)
+				->add('task', TextType::class)
+				->add('dueDate', DateType::class, array('label' => 'Due date choice'))
+				->add('save', SubmitType::class, array('label' => 'Create Task'))
+				->getForm();
+				
+		$form->handleRequest($request);
+		
+		if($form->isSubmitted() && $form->isValid())
+		{
+			return $this->redirectToRoute('task_success');
+		}
+						
+		return $this->render('default/new.html.twig', array('form'=> $form->createView(),));
 	}
 }
